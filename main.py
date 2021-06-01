@@ -50,7 +50,7 @@ if __name__ == "__main__":
   checkpoint_path = "training_checkpoints/cp.ckpt"
   checkpoint_dir = os.path.dirname(checkpoint_path)
 
-  epoch_count = 1 #20 #90 300
+  epoch_count = 20 #90 300
 
   # Create a callback that saves the model's weights
   checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_freq=1000, save_weights_only=True,verbose=1)
@@ -100,6 +100,9 @@ if __name__ == "__main__":
     'test_dataset_size': len(test_CnDLoader) * 1,
     })
 
+  # Loads the weights
+  model.load_weights(checkpoint_path)
+
   for counter in range(0, 2000):
     t_534 = time.time()
 
@@ -130,7 +133,7 @@ if __name__ == "__main__":
     test_performance = np.sum(test_y==(test_prediction.T>=0.5)) / len(test_x)
     wandb.log({"test performance": test_performance})
 
-    #tracker.print_diff()
+    tracker.print_diff()
 
     #print("predictions shape:", prediction.shape)
     #filenameP = f"{date_time_prefix}_{counter}_P"
