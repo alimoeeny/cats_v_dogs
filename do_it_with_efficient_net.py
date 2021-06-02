@@ -57,14 +57,14 @@ if __name__ == "__main__":
   epoch_count = 1 #20 #90 300
 
   # Create a callback that saves the model's weights
-  checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_freq=1000, save_weights_only=True,verbose=1)
+  checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_freq=100, save_weights_only=True,verbose=1)
 
   optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 
   loss_func = tf.keras.losses.BinaryCrossentropy(from_logits=True)
 
-  IMAGE_SIDE = 500
-  BATCH_SIZE = 100
+  IMAGE_SIDE = 448
+  BATCH_SIZE = 64
   FEATURE_FILTERS = [120, 150, 240] #[12, 15, 24]
   KERNEL_SIZE = 3
   STRIDES = [(3,3), (3,3), (3,3)]
